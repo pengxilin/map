@@ -1,0 +1,141 @@
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>ArcGIS Maps SDK with Components</title>
+
+  <style>
+    html,
+    body,
+    arcgis-map {
+      padding: 0;
+      margin: 0;
+      height: 100%;
+      width: 100%;
+    }
+    #basemapStyles {
+      background-color: white;
+      border-radius: 5px;
+      padding: 10px;
+      width: 250px;
+    }
+    #searchWidget {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      z-index: 1;
+      width: 300px;
+    }
+  </style>
+
+  <!-- Load Calcite components from CDN -->
+  <script type="module" src="https://js.arcgis.com/calcite-components/3.0.3/calcite.esm.js"></script>
+
+  <!-- Load the ArcGIS Maps SDK for JavaScript from CDN -->
+  <link rel="stylesheet" href="https://js.arcgis.com/4.32/esri/themes/light/main.css" />
+  <script src="https://js.arcgis.com/4.32/"></script>
+
+  <!-- Load Map components from CDN-->
+  <script type="module" src="https://js.arcgis.com/map-components/4.32/arcgis-map-components.esm.js"></script>
+
+</head>
+
+<body>
+   
+  <calcite-shell>
+    <calcite-navigation slot="header">
+      <calcite-navigation-logo slot="logo" target="_blank"></calcite-navigation-logo>
+    </calcite-navigation>
+
+    <arcgis-map item-id="05e015c5f0314db9a487a9b46cb37eca">
+      <!-- 默认组件 -->
+      <arcgis-zoom position="top-left"></arcgis-zoom>
+      <arcgis-scale position="bottom-left"></arcgis-scale> <!-- 添加比例尺 -->
+      
+      <arcgis-placement position="top-right">
+        <div id="basemapStyles">
+          <calcite-label>
+            Basemap Style:
+            <calcite-combobox id="styleCombobox" selection-mode="single" clear-disabled>
+              <!-- 保留原有的basemap选项 -->
+              
+                <calcite-combobox-item value="arcgis/navigation" text-label="arcgis/navigation"></calcite-combobox-item>
+                <calcite-combobox-item value="arcgis/navigation-night" text-label="arcgis/navigation-night"></calcite-combobox-item>
+                <calcite-combobox-item value="arcgis/streets" text-label="arcgis/streets"></calcite-combobox-item>
+                <calcite-combobox-item value="arcgis/streets-relief" text-label="arcgis/streets-relief"></calcite-combobox-item>
+                <calcite-combobox-item value="arcgis/streets-night" text-label="arcgis/streets-night"></calcite-combobox-item>
+                <calcite-combobox-item value="arcgis/outdoor" text-label="arcgis/outdoor"></calcite-combobox-item>
+                <calcite-combobox-item value="arcgis/imagery" text-label="arcgis/imagery"></calcite-combobox-item>
+                <calcite-combobox-item value="arcgis/topographic" text-label="arcgis/topographic" selected></calcite-combobox-item>
+                <calcite-combobox-item value="arcgis/terrain" text-label="arcgis/terrain"></calcite-combobox-item>
+                <calcite-combobox-item value="arcgis/oceans" text-label="arcgis/oceans"></calcite-combobox-item>
+                <calcite-combobox-item value="arcgis/light-gray" text-label="arcgis/light-gray"></calcite-combobox-item>
+                <calcite-combobox-item value="arcgis/dark-gray" text-label="arcgis/dark-gray"></calcite-combobox-item>
+                <calcite-combobox-item value="arcgis/human-geography" text-label="arcgis/human-geography"></calcite-combobox-item>
+                <calcite-combobox-item value="arcgis/human-geography-dark" text-label="arcgis/human-geography-dark"></calcite-combobox-item>
+                <calcite-combobox-item value="arcgis/charted-territory" text-label="arcgis/charted-territory"></calcite-combobox-item>
+                <calcite-combobox-item value="arcgis/colored-pencil" text-label="arcgis/colored-pencil"></calcite-combobox-item>
+                <calcite-combobox-item value="arcgis/nova" text-label="arcgis/nova"></calcite-combobox-item>
+                <calcite-combobox-item value="arcgis/modern-antique" text-label="arcgis/modern-antique"></calcite-combobox-item>
+                <calcite-combobox-item value="arcgis/midcentury" text-label="arcgis/midcentury"></calcite-combobox-item>
+                <calcite-combobox-item value="arcgis/newspaper" text-label="arcgis/newspaper"></calcite-combobox-item>
+                <calcite-combobox-item value="osm/standard" text-label="osm/standard"></calcite-combobox-item>
+                <calcite-combobox-item value="osm/standard-relief" text-label="osm/standard-relief"></calcite-combobox-item>
+                <calcite-combobox-item value="osm/navigation" text-label="osm/navigation"></calcite-combobox-item>
+                <calcite-combobox-item value="osm/navigation-dark" text-label="osm/navigation-dark"></calcite-combobox-item>
+                <calcite-combobox-item value="osm/streets" text-label="osm/streets"></calcite-combobox-item>
+                <calcite-combobox-item value="osm/hybrid" text-label="osm/hybrid"></calcite-combobox-item>
+                <calcite-combobox-item value="osm/light-gray" text-label="osm/light-gray"></calcite-combobox-item>
+                <calcite-combobox-item value="osm/dark-gray" text-label="osm/dark-gray"></calcite-combobox-item>
+                <calcite-combobox-item value="osm/blueprint" text-label="osm/blueprint"></calcite-combobox-item>
+            
+            </calcite-combobox>
+          </calcite-label>
+        </div>
+      </arcgis-placement>
+      
+      <!-- 添加搜索框 -->
+      <arcgis-search id="searchWidget" position="top-right"></arcgis-search>
+      
+      <!-- 添加图层列表 -->
+      <arcgis-layer-list position="top-right"></arcgis-layer-list>
+      
+      <arcgis-legend position="bottom-right"></arcgis-legend>
+    </arcgis-map>
+
+  </calcite-shell>
+  <calcite-loader></calcite-loader>
+
+  <script>
+    document.querySelector("arcgis-map").addEventListener("arcgisViewReadyChange", (event) => {
+      const { portalItem } = event.target.map;
+      const navigationLogo = document.querySelector("calcite-navigation-logo");
+      navigationLogo.heading = portalItem.title;
+      navigationLogo.description = portalItem.snippet;
+      navigationLogo.thumbnail = portalItem.thumbnailUrl;
+      navigationLogo.href = portalItem.itemPageUrl;
+      navigationLogo.label = "Thumbnail of map";
+
+      // 关闭加载器
+      document.querySelector("calcite-loader").hidden = true;
+
+      // 获取视图实例
+      const view = event.target.view;
+      
+      // 确保所有组件都能访问视图
+      document.querySelector("arcgis-search").view = view;
+      document.querySelector("arcgis-layer-list").view = view;
+    });
+
+    document.querySelector("#styleCombobox").addEventListener("calciteComboboxChange", (event) => {
+      updateBasemapStyle(event.target.value);
+    });
+
+    function updateBasemapStyle(style) {
+      const map = document.querySelector("arcgis-map").map;
+      map.basemap = style;
+    }
+  </script>
+
+</body>
+</html>
